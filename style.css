@@ -22,7 +22,7 @@
     display: flex;
     flex-wrap: wrap;
     background-color: lightgreen;
-    margin: 20px;
+    margin: 10px;
 }
 
 .grid-display {
@@ -31,13 +31,45 @@
     display: flex;
     flex-wrap: wrap;
     background-color: yellow;
-    margin: 20px;
+    margin: 10px;
 }
 
 .destroyer-container{
     width: 80px;
     height: 40px;
     background-color: orange;
+    margin: 10px; 
+    display: flex;
+}
+
+.submarine-container{
+    width: 120px;
+    height: 40px;
+    background-color:pink;
+    margin: 10px; 
+    display: flex;
+}
+
+.cruiser-container{
+    width: 120px;
+    height: 40px;
+    background-color:purple;
+    margin: 10px; 
+    display: flex;
+}
+
+.battleship-container{
+    width: 160px;
+    height: 40px;
+    background-color:aqua;
+    margin: 10px; 
+    display: flex;
+}
+
+.carrier-container{
+    width: 200px;
+    height: 40px;
+    background-color:green;
     margin: 10px; 
     display: flex;
 }
