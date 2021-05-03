@@ -103,6 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
             battleship.classList.toggle('battleship-container-vertical')
             carrier.classList.toggle('carrier-container-vertical')
             isHorizontal = false
+            return
+        }
+        if (!isHorizontal) {
+            destroyer.classList.toggle('destroyer-container-vertical')
+            submarine.classList.toggle('submarine-container-vertical')
+            cruiser.classList.toggle('cruiser-container-vertical')
+            battleship.classList.toggle('battleship-container-vertical')
+            carrier.classList.toggle('carrier-container-vertical')
+            isHorizontal = true
+            return
         }
     }
     rotateButton.addEventListener('click', rotate)
