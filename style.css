@@ -143,3 +143,11 @@
 .carrier {
     background-color: green;
 }
+
+.boom {
+    background-color: red;
+}
+
+.miss {
+    background-color: black;
+}
