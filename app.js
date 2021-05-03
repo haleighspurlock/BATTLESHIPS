@@ -247,6 +247,60 @@ document.addEventListener('DOMContentLoaded', () => {
         turnDisplay.innerHTML = 'Your Turn!'
     }
 
+    function checkForWins () {
+        if (destroyerCount === 2) {
+            infoDisplay.innerHTML = 'You sunk the computers destroyer!'
+            destroyerCount = 10
+        }
+        if (submarineCount === 3) {
+            infoDisplay.innerHTML = 'You sunk the computers submarine!'
+            submarineCount = 10
+        }
+        if (cruiserCount === 3) {
+            infoDisplay.innerHTML = 'You sunk the computers cruiser!'
+            cruiserCount = 10
+        }
+        if (battleshipCount === 4) {
+            infoDisplay.innerHTML = 'You sunk the computers battleship!'
+            battleshipCount = 10
+        }
+        if (carrierCount === 5) {
+            infoDisplay.innerHTML = 'You sunk the computers carrier!'
+            carrierCount = 10
+        }
+        if (cpuDestroyerCount === 2) {
+            infoDisplay.innerHTML = 'You sunk the computers destroyer!'
+            cpuDestroyerCount = 10
+        }
+        if (cpuSubmarineCount === 3) {
+            infoDisplay.innerHTML = 'You sunk the computers submarine!'
+            cpuSubmarineCount = 10
+        }
+        if (cpuCruiserCount === 3) {
+            infoDisplay.innerHTML = 'You sunk the computers cruiser!'
+            cpuCruiserCount = 10
+        }
+        if (cpuBattleshipCount === 4) {
+            infoDisplay.innerHTML = 'You sunk the computers battleship!'
+            cpuBattleshipCount = 10
+        }
+        if (cpuCarrierCount === 5) {
+            infoDisplay.innerHTML = 'You sunk the computers carrier!'
+            cpuCarrierCount = 10
+        }
+        if ((destroyerCount + submarineCount + cruiserCount + battleshipCount + carrierCount) === 50) {
+            infoDisplay.innerHTML = 'YOU WIN!!'
+            gameOver()
+        }
+        if ((cpuDestroyerCount + cpuSubmarineCount + cpuCruiserCount + cpuBattleshipCount + cpuCarrierCount) === 50) {
+            infoDisplay.innerHTML = 'YOU LOSE, COMPUTER WINS!!'
+            gameOver()
+        }
+    }
 
+    function gameOver() {
+        isGameOver = true
+        startButton.removeEventListener('click', playGame)
+    }
 })
 
