@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const width = 10
 
+    const socket = io();
+
     //create board
     function createBoard(grid, squares) {
         for (let i = 0; i < width*width; i++) {
