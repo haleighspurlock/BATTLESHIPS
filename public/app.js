@@ -12,15 +12,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const rotateButton = document.querySelector('#rotate')
     const turnDisplay = document.querySelector('#whose-turn')
     const infoDisplay = document.querySelector('#info')
+    const singlePlayerButton = document.querySelector('#singlePlayerButton')
+    const multiPlayerButton = document.querySelector('#multiPlayerButton')
     const userSquares = []
     const computerSquares = []
     let isHorizontal = true
     let isGameOver = false
     let currentPlayer = 'user'
-
     const width = 10
+    let gameMode = '';
+    let playerNum = 0;
+    let ready = false;
+    let enemyReady =false;
+    let allShipsPlaced = false;
+    let shotFired = -1;
+
+    //
 
     const socket = io();
+
+    //get your player number
+    socket.on('player-number', num => {
+        if (num === -1) {
+            infoDisplay.innerHTML = 'Sorry, the server is full!'
+        } else {
+            playerNum = parseInt(num)
+            if(playerNum === 1) currentPlayer = 'enemy'
+
+            console.log(playerNum)
+        }
+    })
 
     //create board
     function createBoard(grid, squares) {
