@@ -35,4 +35,17 @@ io.on('connection', socket => {
 
         //Ignore player 3
         if (playerIndex === -1) return
+
+    connections[playerIndex] = false
+
+    //tell everyone what player number just connected
+    socket.broadcast.emit('player-connection', playerIndex)
+
+    //handle disconnect
+    socket.on('disconnect', () => {
+        console.log(`Player ${playerIndex} disconnected!`)
+        connections[playerIndex] = null
+        //tell everyone what player number just disconnected
+        socket.broadcast.emit('player connection', playerIndex)
+    })
 })
