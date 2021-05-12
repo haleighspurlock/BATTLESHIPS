@@ -3,6 +3,7 @@ const path = require('path')
 const http = require('http')
 const PORT = process.env.PORT || 3000
 const socketio = require('socket.io')
+const { createSocket } = require('dgram')
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
@@ -63,4 +64,27 @@ io.on('connection', socket => {
         }
         socket.emit('check-players', players)
     })
+
+    //on fire received
+    socket.on('fire', id => {
+        console.log(`Shot fired from ${playerIndex}`, id)
+
+        //emit move to other player
+        socket.broadcast.emit('fire', id)
+    })
+
+    //on fire reply
+    socket.on('fire-reply', square => {
+        console.log(square)
+
+        //forward the reply to the other player
+        socket.broadcast.emit('fire-reply', square)
+    })
+
+    //timeout connection
+    setTimeout(() => {
+        connections[playerIndex] = null
+        socket.emit('timeout')
+        socket.disconnect()
+    }, 600000) //10 minute limit per player
 })
