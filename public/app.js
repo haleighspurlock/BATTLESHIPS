@@ -322,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentPlayer === 'user') {
             turnDisplay.innerHTML = 'Your Turn!'
             computerSquares.forEach(square => square.addEventListener('click', function(e) {
+                shotFired = square.dataset.id
                 revealSquare(square.classList)
             }))
         }
