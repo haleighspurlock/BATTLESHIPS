@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if(playerNum === 1) currentPlayer = 'enemy'
 
             console.log(playerNum)
+
+            //get other player status
+            socket.emit('check-players')
         }
         })
 
@@ -52,6 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.on('player-connection', num => {
             console.log(`Player number ${num} has connected or disconnected`)
             playerConnectedOrDisconnected(num)
+        })
+
+        //on enemy ready
+        socket.on('enemy-ready', num => {
+            enemyReady = true;
+            playerReady(num)
+            if (ready) playGameMulti(socket)
+        })
+
+        //check player status
+        socket.on('check-players', players => {
+            players.forEach((p,i) => {
+                if(p.connected) playerConnectedOrDisconnected(i)
+                if(p.ready) {
+                    playerReady(i)
+                    if (i != playerNum) enemyReady = true
+                }
+            })
         })
 
         //ready button click
@@ -250,6 +271,20 @@ document.addEventListener('DOMContentLoaded', () => {
             ready = true
             playerReady(playerNum)
         }
+
+        if (enemyReady) {
+            if(currentPlayer === 'user') {
+                turnDisplay.innerHTML = 'Your Turn'
+            }
+            if (currentPlayer === 'enemy') {
+                turnDisplay.innerHTML = "Enemy's Turn"
+            }
+        }
+    }
+
+    function playerReady (num) {
+        let player = `.p${parseInt(num) + 1}`
+        document.querySelector(`${player} .ready span`).classList.toggle('green')
     }
 
     //game logic for single player
