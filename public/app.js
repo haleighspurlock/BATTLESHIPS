@@ -54,6 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
             playerConnectedOrDisconnected(num)
         })
 
+        //ready button click
+        startButton.addEventListener('click', () => {
+            if(allShipsPlaced) playGameMulti(socket)
+            else infoDisplay.innerHTML = 'Please place all ships!'
+        })
+
         function playerConnectedOrDisconnected(num) {
             let player = `.p${parseInt(num) + 1}`
             document.querySelector(`${player} .connected span`).classList.toggle('green')
@@ -230,13 +236,23 @@ document.addEventListener('DOMContentLoaded', () => {
         } else return
 
         displayGrid.removeChild(draggedShip)
+        if(!displayGrid.querySelector('.ship')) allShipsPlaced = true
     }
 
     function dragEnd() {
         console.log('dragend')
     }
+    //game logic for multiplayer
+    function playGameMulti(socket){
+        if(isGameOver) return
+        if (!ready) {
+            socket.emit('player-ready')
+            ready = true
+            playerReady(playerNum)
+        }
+    }
 
-    //game logic
+    //game logic for single player
     function playGameSingle() {
         if (isGameOver) return
         if (currentPlayer === 'user') {
